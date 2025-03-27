@@ -1,0 +1,33 @@
+module Blink (
+    i_clk: input  clock,
+    o_led: output logic,
+) {
+    var counter: logic<20>;
+
+    always_ff {
+        counter = counter + 1;
+    }
+    assign o_led = counter[msb];
+}
+
+#[test(blink)]
+embed (inline) sv{{{
+    module test;
+        logic clk;
+        logic o_led;
+       
+        veryl_blink_Blink blink (clk, led);
+
+        integer i;
+        initial begin
+            clk = 0; #10 clk = 1; #10;
+
+            for (i = 0; i < 64; i = i + 1) begin
+			    $display ("Current loop#%0d ", i);
+                clk = 0; #10 clk = 1; #10;
+		    end
+
+            $finish;
+        end
+    endmodule
+}}}

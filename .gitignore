@@ -1,0 +1,9 @@
+/dependencies
+/src/*.sv
+/src/*.sv.map
+/src/*.vcd
+/xilinx/blinky
+.Xil
+*.f
+/xilinx/ip
+
