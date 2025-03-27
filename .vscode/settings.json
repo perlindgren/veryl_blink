@@ -1,6 +1,7 @@
 {
     "cSpell.ignoreWords": [
         "endmodule",
+        "posedge",
         "sysclk",
         "veryl"
     ]
