@@ -10,7 +10,8 @@ add_files -norecurse -fileset [current_fileset] "./xilinx/ip/clk_wiz_0/clk_wiz_0
 add_files -norecurse -fileset constrs_1 "./xilinx/constraints/ARTY.xdc"
 
 # set property for constraints
-set_property used_in_synthesis false "./xilinx/constraints/ARTY.xdc"
+# not used here
+# set_property used_in_synthesis false [get_files "./xilinx/constraints/ARTY.xdc" ]
 
 set_property verilog_define [list \
     TARGET_FPGA \
