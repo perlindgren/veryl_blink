@@ -1,8 +1,17 @@
 {
     "cSpell.ignoreWords": [
+        "Vivado",
+        "blinky",
+        "constrs",
         "endmodule",
+        "fileset",
+        "norecurse",
         "posedge",
+        "simset",
         "sysclk",
+        "sysclock",
+        "ticsg",
+        "verilog",
         "veryl"
     ]
 }

@@ -2,8 +2,11 @@
 /src/*.sv
 /src/*.sv.map
 /src/*.vcd
-/xilinx/blinky
+/xilinx/blinky.*
 .Xil
+*.jou
+*.log
 *.f
+*.str
 /xilinx/ip
 

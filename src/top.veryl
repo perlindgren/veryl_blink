@@ -1,0 +1,36 @@
+// top.veryl
+
+module top (
+    sysclock: input  `a clock    ,
+    led     : output    logic [4],
+) {
+
+    var clk    : `b clock    ;
+    var r_count:    logic<32>;
+    var locked :    logic    ;
+
+    unsafe (cdc) {
+        inst blink: Blink (
+            i_clk: clk   ,
+            o_led: led[1],
+        );
+    }
+
+    unsafe (cdc) {
+        inst clk_gen: clk_wiz_0 (
+            clk_in1 : sysclk,
+            clk_out1: clk   ,
+            r#reset : 0     ,
+            locked          ,
+
+        );
+    }
+
+    // clock divider on domain `b
+    unsafe (cdc) {
+        always_ff (clk) {
+            r_count = r_count + 1;
+            led[0]  = r_count[22];
+        }
+    }
+}
