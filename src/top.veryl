@@ -16,15 +16,16 @@ module top (
         );
     }
 
-    unsafe (cdc) {
-        inst clk_gen: clk_wiz_0 (
-            clk_in1 : sysclk,
-            clk_out1: clk   ,
-            r#reset : 0     ,
-            locked          ,
+    // 1) how to interface to generated external code
+    // 2) will it require unsafe?
+    // domain b is generated from domain a
+    inst clk_gen: clk_wiz_0 (
+        clk_in1 : sysclock,
+        clk_out1: clk     ,
+        r#reset : 0       ,
+        locked            ,
 
-        );
-    }
+    );
 
     // clock divider on domain `b
     unsafe (cdc) {
@@ -34,3 +35,28 @@ module top (
         }
     }
 }
+
+// the generated clock wizard ip
+// clk_wiz_o.v
+// module clk_wiz_0
+//  (
+//   // Clock out ports
+//   output        clk_out1,
+//   // Status and control signals
+//   input         reset,
+//   output        locked,
+//  // Clock in ports
+//   input         clk_in1
+//  );
+//
+//   clk_wiz_0_clk_wiz inst
+//   (
+//   // Clock out ports
+//   .clk_out1(clk_out1),
+//   // Status and control signals
+//   .reset(reset),
+//   .locked(locked),
+//  // Clock in ports
+//   .clk_in1(clk_in1)
+//   );
+// endmodule
