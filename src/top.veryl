@@ -19,13 +19,14 @@ module top (
     // 1) how to interface to generated external code
     // 2) will it require unsafe?
     // domain b is generated from domain a
-    inst clk_gen: clk_wiz_0 (
-        clk_in1 : sysclock,
-        clk_out1: clk     ,
-        r#reset : 0       ,
-        locked            ,
-
-    );
+    unsafe (cdc) {
+        inst clk_gen: $sv::clk_wiz_0 (
+            clk_in1 : sysclock,
+            clk_out1: clk     ,
+            r#reset : 0       ,
+            locked            ,
+        );
+    }
 
     // clock divider on domain `b
     unsafe (cdc) {
