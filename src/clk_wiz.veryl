@@ -6,7 +6,7 @@ module ClkWiz (
     locked  : output `b logic,
 ) {
 
-    // domain b is generated from domain a
+    // Clock domain `b is generated from domain `a
     unsafe (cdc) {
         inst clk_gen: $sv::clk_wiz_0 (
             clk_in1    ,
