@@ -1,34 +1,21 @@
-// top.veryl
-
-module top (
-    sysclock: input  `a clock    ,
-    led     : output `b logic [4],
+// clk_wiz.veryl
+// wrapper of generated clk_wiz_0
+module ClkWiz (
+    clk_in1 : input  `a clock,
+    clk_out1: output `b clock,
+    locked  : output `b logic,
 ) {
-
-    var clk    : `b clock    ;
-    var r_count: `b logic<32>;
-    var locked :    logic    ;
-
-    inst blink: Blink (
-        i_clk: clk   ,
-        o_led: led[1],
-    );
 
     // domain b is generated from domain a
     unsafe (cdc) {
         inst clk_gen: $sv::clk_wiz_0 (
-            clk_in1 : sysclock,
-            clk_out1: clk     ,
-            r#reset : 0       ,
-            locked            ,
+            clk_in1    ,
+            clk_out1   ,
+            r#reset : 0,
+            locked     ,
         );
     }
 
-    // clock divider on domain `b
-    always_ff (clk) {
-        r_count = r_count + 1;
-        led[0]  = r_count[22];
-    }
 }
 
 // the generated clock wizard ip
@@ -40,7 +27,7 @@ module top (
 //   // Status and control signals
 //   input         reset,
 //   output        locked,
-//  // Clock in ports
+//   // Clock in ports
 //   input         clk_in1
 //  );
 //
@@ -51,7 +38,7 @@ module top (
 //   // Status and control signals
 //   .reset(reset),
 //   .locked(locked),
-//  // Clock in ports
+//   // Clock in ports
 //   .clk_in1(clk_in1)
 //   );
 // endmodule

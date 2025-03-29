@@ -1,0 +1,28 @@
+// top_safe.veryl
+
+module top_safe (
+    sysclock: input  `a clock    ,
+    led     : output `b logic [4],
+) {
+    var clk    : `b clock    ;
+    var r_count: `b logic<32>;
+    var locked : `b logic    ;
+
+    inst blink: Blink (
+        i_clk: clk   ,
+        o_led: led[1],
+    );
+
+    // domain b is generated from domain a
+    inst clk_gen: ClkWiz (
+        clk_in1 : sysclock,
+        clk_out1: clk     ,
+        locked            ,
+    );
+
+    // clock divider on domain `b
+    always_ff (clk) {
+        r_count = r_count + 1;
+        led[0]  = r_count[22];
+    }
+}
